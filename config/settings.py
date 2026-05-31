@@ -31,13 +31,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'workspaces.apps.WorkspacesConfig',
-    'workflow.apps.WorkflowsConfig',
-    'support.apps.SupportConfig',
-    'brands.apps.BrandsConfig',
-    'assistant.apps.AssistantConfig',
-    'analytics.apps.AnalyticsConfig',
-    'accounts.apps.AccountsConfig',
+    'apps.workspaces.apps.WorkspacesConfig',
+    'apps.workflows.apps.WorkflowsConfig',
+    'apps.support.apps.SupportConfig',
+    'apps.brands.apps.BrandsConfig',
+    'apps.assistant.apps.AssistantConfig',
+    'apps.analytics.apps.AnalyticsConfig',
+    'apps.accounts.apps.AccountsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

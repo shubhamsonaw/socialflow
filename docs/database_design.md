@@ -16,13 +16,23 @@
 
 ## User
 
+Purpose:
 Stores platform users.
 
 Fields:
 
-* name
-* email
-* role
+- email
+- username
+- role
+- workspace
+- is_active
+- created_at
+
+Roles:
+
+- admin
+- manager
+- member
 
 ---
 

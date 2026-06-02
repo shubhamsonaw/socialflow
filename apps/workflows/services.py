@@ -1,4 +1,4 @@
-from .models import WorkflowStep
+from .models import WorkflowStep, ActivityLog
 
 
 class WorkflowEngine:
@@ -7,6 +7,13 @@ class WorkflowEngine:
     def complete_step(step):
         step.status = "completed"
         step.save()
+        
+        ActivityLog.objects.create(
+            task=step.task,
+            user=step.task.created_by,
+            action="step_completed",
+            description=f"{step.name} completed"
+        )
 
         next_step = WorkflowStep.objects.filter(
             task=step.task,

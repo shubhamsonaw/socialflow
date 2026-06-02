@@ -92,3 +92,36 @@ class WorkflowStep(models.Model):
 
     def __str__(self):
         return f"{self.task.title} - {self.name}"
+    
+class ActivityLog(models.Model):
+
+    ACTION_CHOICES = (
+        ("task_created", "Task Created"),
+        ("step_completed", "Step Completed"),
+        ("workflow_completed", "Workflow Completed"),
+    )
+
+    task = models.ForeignKey(
+        WorkflowTask,
+        on_delete=models.CASCADE,
+        related_name="activities"
+    )
+
+    user = models.ForeignKey(
+        "accounts.User",
+        on_delete=models.CASCADE
+    )
+
+    action = models.CharField(
+        max_length=50,
+        choices=ACTION_CHOICES
+    )
+
+    description = models.TextField()
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    def __str__(self):
+        return f"{self.action}"

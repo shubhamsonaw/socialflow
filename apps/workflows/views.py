@@ -1,8 +1,12 @@
 from django.shortcuts import render
 from rest_framework import viewsets
 from .models import WorkflowTask
-from .serializers import WorkflowTaskSerializer
+from .serializers import WorkflowTaskSerializer, WorkflowStepSerializer
 from rest_framework.permissions import IsAuthenticated
+from .models import WorkflowTask, WorkflowStep
+from .services import WorkflowEngine
+from rest_framework.decorators import action
+from rest_framework.response import Response
 
 # Create your views here.
 
@@ -26,3 +30,21 @@ class WorkflowTaskViewSet(viewsets.ModelViewSet):
             created_by=self.request.user,
             workspace=self.request.user.workspace
         )
+        
+class WorkflowStepViewSet(viewsets.ModelViewSet):
+
+    queryset = WorkflowStep.objects.all()
+    serializer_class = WorkflowStepSerializer
+    permission_classes = [IsAuthenticated]
+
+    @action(detail=True, methods=["post"])
+    def complete(self, request, pk=None):
+
+        step = self.get_object()
+
+        next_step = WorkflowEngine.complete_step(step)
+
+        return Response({
+            "message": "Step completed successfully",
+            "next_step": next_step.name if next_step else None
+        })

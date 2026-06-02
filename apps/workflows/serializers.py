@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import WorkflowTask
+from .models import WorkflowTask, WorkflowStep
 
 
 class WorkflowTaskSerializer(serializers.ModelSerializer):
@@ -13,3 +14,8 @@ class WorkflowTaskSerializer(serializers.ModelSerializer):
             "created_at",
             "updated_at",
         )
+        
+class WorkflowStepSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WorkflowStep
+        fields = "__all__"

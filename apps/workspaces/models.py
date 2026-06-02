@@ -15,3 +15,11 @@ class Workspace(models.Model):
 
     def __str__(self):
         return self.name
+    
+    owner = models.ForeignKey(
+        "accounts.User",
+        on_delete=models.CASCADE,
+        related_name="owned_workspaces",
+        null=True,
+        blank=True,
+    )

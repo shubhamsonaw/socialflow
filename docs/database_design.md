@@ -108,3 +108,16 @@ Fields:
 * result
 * status
 * completed_at
+
+## WorkflowStep
+
+Purpose:
+Represents a single step inside a workflow task.
+
+Fields:
+
+- task
+- name
+- order
+- status
+- created_at

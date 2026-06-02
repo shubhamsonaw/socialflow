@@ -58,3 +58,37 @@ class WorkflowTask(models.Model):
 
     def __str__(self):
         return self.title
+    
+class WorkflowStep(models.Model):
+
+    STATUS_CHOICES = (
+        ("pending", "Pending"),
+        ("in_progress", "In Progress"),
+        ("completed", "Completed"),
+        ("failed", "Failed"),
+    )
+
+    task = models.ForeignKey(
+        WorkflowTask,
+        on_delete=models.CASCADE,
+        related_name="steps"
+    )
+
+    name = models.CharField(
+        max_length=255
+    )
+
+    order = models.PositiveIntegerField()
+
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default="pending"
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    def __str__(self):
+        return f"{self.task.title} - {self.name}"

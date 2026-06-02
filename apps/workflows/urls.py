@@ -3,6 +3,10 @@ from rest_framework.routers import DefaultRouter
 from .views import WorkflowTaskViewSet
 
 router = DefaultRouter()
-router.register("tasks", WorkflowTaskViewSet)
+router.register(
+    "tasks",
+    WorkflowTaskViewSet,
+    basename="workflow-task"
+)
 
 urlpatterns = router.urls

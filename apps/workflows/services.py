@@ -14,6 +14,7 @@ class WorkflowEngine:
             action="step_completed",
             description=f"{step.name} completed"
         )
+        step.save()
 
         next_step = WorkflowStep.objects.filter(
             task=step.task,

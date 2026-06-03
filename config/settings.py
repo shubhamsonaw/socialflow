@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'apps.notifications.apps.NotificationsConfig',
     "rest_framework",
     'apps.workspaces.apps.WorkspacesConfig',
     'apps.workflows.apps.WorkflowsConfig',

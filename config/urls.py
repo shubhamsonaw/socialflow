@@ -26,4 +26,5 @@ urlpatterns = [
     path("api/token/", TokenObtainPairView.as_view()),
     path("api/token/refresh/", TokenRefreshView.as_view()),
     path("api/", include("apps.workflows.urls")),
+    path("api/",include("apps.notifications.urls")),
 ]

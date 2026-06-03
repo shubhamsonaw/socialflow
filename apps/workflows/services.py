@@ -1,5 +1,5 @@
 from .models import WorkflowStep, ActivityLog
-
+from apps.notifications.services import NotificationService
 
 class WorkflowEngine:
 
@@ -14,7 +14,13 @@ class WorkflowEngine:
             action="step_completed",
             description=f"{step.name} completed"
         )
-        step.save()
+        # step.save()
+        
+        NotificationService.create_notification(
+            user=step.task.created_by,
+            title="Workflow Update",
+            message=f"{step.name} completed successfully"
+)
 
         next_step = WorkflowStep.objects.filter(
             task=step.task,
@@ -26,3 +32,5 @@ class WorkflowEngine:
             next_step.save()
 
         return next_step
+    
+       

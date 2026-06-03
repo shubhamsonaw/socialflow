@@ -13,7 +13,7 @@ class GeminiClient:
     @staticmethod
     def generate_response(prompt):
 
-        model = genai.GenerativeModel("gemini-1.5-flash-latest")
+        model = genai.GenerativeModel("gemini-2.5-flash")
 
         response = model.generate_content(
             prompt

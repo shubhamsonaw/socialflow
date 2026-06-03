@@ -5,6 +5,6 @@ from .views import AssistantChatView
 
 urlpatterns = [
     path(
-        "assistant/chat/",AssistantChatView.as_view(),name="assistant-chat"),
+        "chat/",AssistantChatView.as_view(),name="assistant-chat"),
     
 ]

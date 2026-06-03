@@ -27,6 +27,6 @@ urlpatterns = [
     path("api/token/refresh/", TokenRefreshView.as_view(),name="token_refresh"),
     path("api/", include("apps.workflows.urls")),
     path("api/",include("apps.notifications.urls")),
-    path("api/",include("apps.assistant.urls")),
+    path("api/assistant/", include("apps.assistant.urls")),
     
 ]

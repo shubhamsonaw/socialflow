@@ -13,8 +13,26 @@ class AssistantService:
             content=message
         )
 
+        previous_messages = ChatMessage.objects.filter(
+            user=user
+        ).order_by("-created_at")[:10]
+
+        context = ""
+
+        for msg in reversed(previous_messages):
+            context += f"{msg.role}: {msg.content}\n"
+
+        prompt = f"""
+        Conversation History:
+
+        {context}
+
+        Current User Message:
+        {message}
+        """
+
         response = GeminiClient.generate_response(
-            message
+            prompt
         )
 
         ChatMessage.objects.create(

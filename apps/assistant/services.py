@@ -34,6 +34,7 @@ class AssistantService:
         response = GeminiClient.generate_response(
             prompt
         )
+        
 
         ChatMessage.objects.create(
             user=user,

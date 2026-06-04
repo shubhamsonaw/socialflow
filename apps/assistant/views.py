@@ -5,6 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from .serializers import ChatSerializer
 from .services import AssistantService
+
 # Create your views here.
 
 class AssistantChatView(APIView):

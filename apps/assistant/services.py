@@ -2,6 +2,7 @@ from .models import ChatMessage
 from .llm_client import GeminiClient
 from apps.brands.models import BrandProfile
 
+
 class AssistantService:
 
     @staticmethod
@@ -63,5 +64,7 @@ class AssistantService:
         )
 
         return response
+    
+
     
     

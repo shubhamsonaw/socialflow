@@ -1,6 +1,6 @@
 from .models import ChatMessage
 from .llm_client import GeminiClient
-
+from apps.brands.models import BrandProfile
 
 class AssistantService:
 
@@ -21,14 +21,34 @@ class AssistantService:
 
         for msg in reversed(previous_messages):
             context += f"{msg.role}: {msg.content}\n"
+            
+        brand = BrandProfile.objects.filter(
+            workspace=user.workspace
+        ).first()
+
+        brand_context = ""
+
+        if brand:
+            brand_context = f"""
+        Brand Name: {brand.brand_name}
+        Tone: {brand.tone}
+        Audience: {brand.audience}
+        """
 
         prompt = f"""
-        Conversation History:
+        You are an AI Social Media Assistant.
 
+        Brand Context:
+        {brand_context}
+
+        Conversation History:
         {context}
 
         Current User Message:
         {message}
+
+        Generate content matching the brand voice,
+        tone, and target audience.
         """
 
         response = GeminiClient.generate_response(
@@ -43,3 +63,5 @@ class AssistantService:
         )
 
         return response
+    
+    

@@ -19,3 +19,19 @@ class ContentAnalytics(models.Model):
 
     def __str__(self):
         return self.content_title
+    
+    @property
+    def engagement_rate(self):
+        if self.impressions == 0:
+            return 0
+
+        engagement = (
+            self.likes +
+            self.comments +
+            self.shares
+        )
+
+        return round(
+            (engagement / self.impressions) * 100,
+            2
+        )

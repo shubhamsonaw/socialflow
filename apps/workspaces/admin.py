@@ -12,3 +12,4 @@ class WorkspaceAdmin(admin.ModelAdmin):
         "name",
         "created_at",
     )
+    

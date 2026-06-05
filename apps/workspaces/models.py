@@ -23,3 +23,34 @@ class Workspace(models.Model):
         null=True,
         blank=True,
     )
+    
+class WorkspaceMember(models.Model):
+
+    ROLE_CHOICES = (
+        ("ADMIN", "Admin"),
+        ("MANAGER", "Manager"),
+        ("MEMBER", "Member"),
+    )
+
+    workspace = models.ForeignKey(
+        Workspace,
+        on_delete=models.CASCADE,
+        related_name="members"
+    )
+
+    user = models.ForeignKey(
+        "accounts.User",
+        on_delete=models.CASCADE,
+        related_name="workspace_memberships"
+    )
+
+    role = models.CharField(
+        max_length=20,
+        choices=ROLE_CHOICES,
+        default="MEMBER"
+    )
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user} - {self.role}"

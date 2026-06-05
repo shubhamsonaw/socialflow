@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class PublishingConfig(AppConfig):
-    name = 'publishing'
+    name = 'apps.publishing'

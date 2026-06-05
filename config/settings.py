@@ -14,6 +14,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 import os
 from datetime import timedelta
+from celery.schedules import crontab
 
 load_dotenv()
 
@@ -36,6 +37,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django_celery_beat',
     'apps.notifications.apps.NotificationsConfig',
     "rest_framework",
     'apps.workspaces.apps.WorkspacesConfig',
@@ -153,3 +155,10 @@ SIMPLE_JWT = {
 CELERY_BROKER_URL = "redis://localhost:6379/0"
 
 CELERY_RESULT_BACKEND = "redis://localhost:6379/0"
+
+CELERY_BEAT_SCHEDULE = {
+    "daily-analytics-report": {
+        "task": "apps.analytics.tasks.generate_daily_report",
+        "schedule": 60.0,
+    },
+}

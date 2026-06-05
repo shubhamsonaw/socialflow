@@ -1,5 +1,6 @@
 from .models import WorkflowStep, ActivityLog
 from apps.notifications.services import NotificationService
+from apps.notifications.tasks import create_notification_task
 
 class WorkflowEngine:
 
@@ -16,11 +17,12 @@ class WorkflowEngine:
         )
         # step.save()
         
-        NotificationService.create_notification(
-            user=step.task.created_by,
-            title="Workflow Update",
-            message=f"{step.name} completed successfully"
-)
+        create_notification_task.delay(
+            step.task.created_by.id,
+            "Workflow Update",
+            f"{step.name} completed successfully"
+            )
+
 
         next_step = WorkflowStep.objects.filter(
             task=step.task,

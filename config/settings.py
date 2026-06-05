@@ -168,3 +168,7 @@ CELERY_BEAT_SCHEDULE = {
         "schedule": 30.0,
     },
 }
+
+LINKEDIN_CLIENT_ID = ""
+LINKEDIN_CLIENT_SECRET = ""
+LINKEDIN_REDIRECT_URI = "http://localhost:8000/api/linkedin/callback/"

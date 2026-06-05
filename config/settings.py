@@ -162,4 +162,9 @@ CELERY_BEAT_SCHEDULE = {
         "task": "apps.analytics.tasks.generate_daily_report",
         "schedule": crontab(hour=9, minute=0),
     },
+
+    "publish-scheduled-posts": {
+        "task": "apps.publishing.tasks.publish_scheduled_posts",
+        "schedule": 30.0,
+    },
 }

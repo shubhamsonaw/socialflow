@@ -159,6 +159,6 @@ CELERY_RESULT_BACKEND = "redis://localhost:6379/0"
 CELERY_BEAT_SCHEDULE = {
     "daily-analytics-report": {
         "task": "apps.analytics.tasks.generate_daily_report",
-        "schedule": 60.0,
+        "schedule": crontab(hour=9, minute=0),
     },
 }

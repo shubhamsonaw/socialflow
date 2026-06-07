@@ -9,3 +9,6 @@ class ContentAnalyticsSerializer(serializers.ModelSerializer):
     class Meta:
         model = ContentAnalytics
         fields = "__all__"
+        read_only_fields = (
+        "workspace",
+    )

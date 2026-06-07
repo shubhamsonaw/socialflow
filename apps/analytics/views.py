@@ -18,6 +18,12 @@ class ContentAnalyticsViewSet(viewsets.ModelViewSet):
 
     permission_classes = [IsAuthenticated]
     
+        
+    def perform_create(self, serializer):
+        serializer.save(
+        workspace=self.request.user.workspace
+        )
+    
     @action(
     detail=False,
     methods=["get"]

@@ -3,6 +3,13 @@ from django.db import models
 # Create your models here.
 
 class ContentAnalytics(models.Model):
+    
+    workspace = models.ForeignKey(
+        "workspaces.Workspace",
+        on_delete=models.CASCADE,
+        related_name="analytics"
+        )
+    
     platform = models.CharField(max_length=50)
 
     content_title = models.CharField(max_length=255)

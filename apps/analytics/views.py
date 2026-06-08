@@ -18,6 +18,11 @@ class ContentAnalyticsViewSet(viewsets.ModelViewSet):
 
     permission_classes = [IsAuthenticated]
     
+    
+    def get_queryset(self):
+        return ContentAnalytics.objects.filter(
+        workspace=self.request.user.workspace
+    )
         
     def perform_create(self, serializer):
         serializer.save(

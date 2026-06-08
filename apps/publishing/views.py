@@ -13,9 +13,19 @@ from .linkedin_service import LinkedInService
 # Create your views here.
 
 class ScheduledPostViewSet(viewsets.ModelViewSet):
-    queryset = ScheduledPost.objects.all()
+    
     serializer_class = ScheduledPostSerializer
     permission_classes = [IsAuthenticated]
+    
+    def get_queryset(self):
+        return ScheduledPost.objects.filter(
+            workspace=self.request.user.workspace
+        )
+
+    def perform_create(self, serializer):
+        serializer.save(
+            workspace=self.request.user.workspace
+        )
     
 class LinkedInConnectView(APIView):
 

@@ -6,3 +6,6 @@ class ScheduledPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = ScheduledPost
         fields = "__all__"
+        read_only_fields = (
+        "workspace",
+    )

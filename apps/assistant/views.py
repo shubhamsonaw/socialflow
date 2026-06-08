@@ -11,6 +11,11 @@ from .services import AssistantService
 class AssistantChatView(APIView):
 
     permission_classes = [IsAuthenticated]
+    
+    def get_queryset(self):
+        return ChatMessage.objects.filter(
+        user=self.request.user
+    )
 
     def post(self, request):
 

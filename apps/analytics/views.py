@@ -12,7 +12,7 @@ from .services import AnalyticsService
 
 class ContentAnalyticsViewSet(viewsets.ModelViewSet):
 
-    queryset = ContentAnalytics.objects.all()
+    queryset = ContentAnalytics.objects.none()
 
     serializer_class = ContentAnalyticsSerializer
 

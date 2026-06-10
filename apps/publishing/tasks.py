@@ -18,3 +18,5 @@ def publish_scheduled_posts():
         post.save()
 
     return f"{posts.count()} posts published"
+
+    

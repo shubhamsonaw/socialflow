@@ -125,3 +125,42 @@ class ActivityLog(models.Model):
 
     def __str__(self):
         return f"{self.action}"
+    
+
+class WorkflowRule(models.Model):
+
+    TRIGGER_CHOICES = (
+        ("post_published", "Post Published"),
+        ("analytics_created", "Analytics Created"),
+        ("social_account_connected", "Social Account Connected"),
+    )
+
+    ACTION_CHOICES = (
+        ("send_notification", "Send Notification"),
+        ("generate_report", "Generate Report"),
+    )
+
+    workspace = models.ForeignKey(
+        "workspaces.Workspace",
+        on_delete=models.CASCADE,
+        related_name="workflow_rules"
+    )
+
+    name = models.CharField(max_length=255)
+
+    trigger = models.CharField(
+        max_length=50,
+        choices=TRIGGER_CHOICES
+    )
+
+    action = models.CharField(
+        max_length=50,
+        choices=ACTION_CHOICES
+    )
+
+    is_active = models.BooleanField(default=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name

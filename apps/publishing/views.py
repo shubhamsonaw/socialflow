@@ -24,7 +24,8 @@ class ScheduledPostViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(
-            workspace=self.request.user.workspace
+            workspace=self.request.user.workspace,
+            status="scheduled"
         )
     
 class LinkedInConnectView(APIView):

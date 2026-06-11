@@ -2,6 +2,7 @@ from celery import shared_task
 from django.utils import timezone
 
 from .models import ScheduledPost
+from apps.workflows.services import WorkflowEngine
 
 
 @shared_task
@@ -16,6 +17,11 @@ def publish_scheduled_posts():
         post.status = "published"
         post.published_at = timezone.now()
         post.save()
+        
+        WorkflowEngine.execute_rule(
+            trigger="post_published",
+            workspace=post.workspace
+        )
 
     return f"{posts.count()} posts published"
 

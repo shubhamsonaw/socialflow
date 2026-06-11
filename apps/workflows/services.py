@@ -50,10 +50,11 @@ class WorkflowEngine:
 
                 users = workspace.users.all()
 
-                for user in users:
+                members = workspace.members.all()
 
+                for member in members:
                     NotificationService.create_notification(
-                        user=user,
+                        user=member.user,
                         title="Workflow Triggered",
                         message=f"Workflow '{rule.name}' executed."
                     )

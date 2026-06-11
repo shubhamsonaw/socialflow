@@ -7,6 +7,8 @@ from .models import WorkflowTask, WorkflowStep
 from .services import WorkflowEngine
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from .models import WorkflowRule
+from .serializers import WorkflowRuleSerializer
 
 # Create your views here.
 
@@ -48,3 +50,19 @@ class WorkflowStepViewSet(viewsets.ModelViewSet):
             "message": "Step completed successfully",
             "next_step": next_step.name if next_step else None
         })
+        
+class WorkflowRuleViewSet(viewsets.ModelViewSet):
+
+    serializer_class = WorkflowRuleSerializer
+
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return WorkflowRule.objects.filter(
+            workspace=self.request.user.workspace
+        )
+
+    def perform_create(self, serializer):
+        serializer.save(
+            workspace=self.request.user.workspace
+        )

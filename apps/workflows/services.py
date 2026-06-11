@@ -1,4 +1,4 @@
-from .models import WorkflowStep, ActivityLog
+from .models import WorkflowStep, ActivityLog, WorkflowRule
 from apps.notifications.services import NotificationService
 from apps.notifications.tasks import create_notification_task
 
@@ -33,6 +33,29 @@ class WorkflowEngine:
             next_step.status = "in_progress"
             next_step.save()
 
-        return next_step
+        return 
+    
+    @staticmethod
+    def execute_rule(trigger, workspace):
+
+        rules = WorkflowRule.objects.filter(
+            trigger=trigger,
+            workspace=workspace,
+            is_active=True
+        )
+
+        for rule in rules:
+
+            if rule.action == "send_notification":
+
+                users = workspace.users.all()
+
+                for user in users:
+
+                    NotificationService.create_notification(
+                        user=user,
+                        title="Workflow Triggered",
+                        message=f"Workflow '{rule.name}' executed."
+                    )
     
        

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import WorkflowTask
-from .models import WorkflowTask, WorkflowStep, ActivityLog
+from .models import WorkflowTask, WorkflowStep, ActivityLog, WorkflowRule
 # Register your models here.
 
 @admin.register(WorkflowTask)
@@ -31,4 +31,27 @@ class ActivityLogAdmin(admin.ModelAdmin):
         "user",
         "action",
         "created_at"
+    )
+    
+@admin.register(WorkflowRule)
+class WorkflowRuleAdmin(admin.ModelAdmin):
+
+    list_display = (
+        "id",
+        "name",
+        "trigger",
+        "action",
+        "workspace",
+        "is_active",
+        "created_at",
+    )
+
+    list_filter = (
+        "trigger",
+        "action",
+        "is_active",
+    )
+
+    search_fields = (
+        "name",
     )

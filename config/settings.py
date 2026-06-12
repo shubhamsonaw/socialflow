@@ -37,6 +37,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'apps.reports.apps.ReportsConfig',
     'apps.dashboard.apps.DashboardConfig',
     'apps.publishing.apps.PublishingConfig',
     'django_celery_beat',

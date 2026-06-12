@@ -31,5 +31,7 @@ urlpatterns = [
     path("api/",include("apps.analytics.urls")),
     path("api/",include("apps.publishing.urls")),
     path("api/dashboard/",include("apps.dashboard.urls")),
+    path("api/reports/",include("apps.reports.urls")),
+    
     
 ]

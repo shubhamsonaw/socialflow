@@ -152,7 +152,7 @@ REST_FRAMEWORK = {
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(hours=1),
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=3),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
 }
 

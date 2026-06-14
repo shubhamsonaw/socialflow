@@ -49,3 +49,15 @@ services:
 
     depends_on:
       - redis
+
+  mongodb:
+    image: mongo:7
+    container_name: socialflow-mongodb
+    ports:
+    - "27017:27017"
+    volumes:
+    - mongodb_data:/data/db
+    
+
+volumes:
+  mongodb_data:

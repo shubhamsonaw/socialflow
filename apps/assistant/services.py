@@ -1,6 +1,8 @@
 from .models import ChatMessage
 from .llm_client import GeminiClient
 from apps.brands.models import BrandProfile
+from .intent_router import IntentRouter
+from .prompt_templates import PromptTemplates
 
 
 class AssistantService:
@@ -36,7 +38,19 @@ class AssistantService:
         Audience: {brand.audience}
         """
 
-        prompt = f"""
+        intent = IntentRouter.detect_intent(
+            message
+        )
+        
+        if intent == "generate_post":
+
+            prompt = PromptTemplates.generate_post(
+                message
+            )
+
+        else:
+
+            prompt = f"""
         You are an AI Social Media Assistant.
 
         Brand Context:

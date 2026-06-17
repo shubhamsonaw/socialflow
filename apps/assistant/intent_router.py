@@ -66,3 +66,23 @@ class IntentRouter:
             return "summarize_article"
 
         return "general_chat"
+    
+    @staticmethod
+    def extract_topic(message):
+
+        message = message.lower()
+
+        phrases = [
+            "create post about",
+            "write post about",
+            "linkedin post about",
+        ]
+
+        for phrase in phrases:
+            if phrase in message:
+                return message.replace(
+                    phrase,
+                    ""
+                ).strip()
+
+        return message

@@ -44,30 +44,54 @@ class AssistantService:
         
         if intent == "generate_post":
 
+            topic = IntentRouter.extract_topic(
+                message
+            )
+            
             prompt = PromptTemplates.generate_post(
-                topic=message,
+                topic=topic,
                 brand_name=brand.brand_name if brand else "Generic Brand",
                 tone=brand.tone if brand else "Professional",
                 audience=brand.audience if brand else "General Audience",
             )
 
+        elif intent == "improve_post":
+
+            prompt = PromptTemplates.improve_post(
+                message
+            )
+
+        elif intent == "content_ideas":
+
+            prompt = PromptTemplates.generate_content_ideas(
+                brand_name=brand.brand_name if brand else "Generic Brand",
+                tone=brand.tone if brand else "Professional",
+                audience=brand.audience if brand else "General Audience",
+            )
+
+        elif intent == "summarize_article":
+
+            prompt = PromptTemplates.summarize_article(
+                message
+            )
+
         else:
 
             prompt = f"""
-        You are an AI Social Media Assistant.
+            You are an AI Social Media Assistant.
 
-        Brand Context:
-        {brand_context}
+            Brand Context:
+            {brand_context}
 
-        Conversation History:
-        {context}
+            Conversation History:
+            {context}
 
-        Current User Message:
-        {message}
+            Current User Message:
+            {message}
 
-        Generate content matching the brand voice,
-        tone, and target audience.
-        """
+            Generate content matching the brand voice,
+            tone, and target audience.
+            """
 
         response = GeminiClient.generate_response(
             prompt

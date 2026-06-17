@@ -16,24 +16,40 @@
 class PromptTemplates:
 
     @staticmethod
-    def generate_post(topic):
+    def generate_post(
+        topic,
+        brand_name,
+        tone,
+        audience
+    ):
         return f"""
-You are a professional social media content strategist.
+    You are a professional social media content strategist.
 
-Write an engaging LinkedIn post about:
+    Brand Name:
+    {brand_name}
 
-Topic: {topic}
+    Brand Tone:
+    {tone}
 
-Requirements:
-- Professional tone
-- Easy to read
-- Hook at the beginning
-- Actionable insights
-- Call to action at the end
-- Add relevant hashtags
+    Target Audience:
+    {audience}
 
-Return only the post.
-"""
+    Create a high-quality social media post.
+
+    Topic:
+    {topic}
+
+    Requirements:
+    - Match the brand tone
+    - Speak directly to the target audience
+    - Strong opening hook
+    - Actionable insights
+    - Professional formatting
+    - Call to action
+    - Relevant hashtags
+
+    Return only the final post.
+    """
 
     @staticmethod
     def improve_post(content):

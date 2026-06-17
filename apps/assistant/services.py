@@ -45,7 +45,10 @@ class AssistantService:
         if intent == "generate_post":
 
             prompt = PromptTemplates.generate_post(
-                message
+                topic=message,
+                brand_name=brand.brand_name if brand else "Generic Brand",
+                tone=brand.tone if brand else "Professional",
+                audience=brand.audience if brand else "General Audience",
             )
 
         else:

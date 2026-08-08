@@ -13,11 +13,8 @@ router.register(
 )
 
 urlpatterns = [
-    path(
-        "linkedin/connect/",
-        LinkedInConnectView.as_view(),
-        name="linkedin-connect"
-    ),
+    path("linkedin/connect/",LinkedInConnectView.as_view(),name="linkedin-connect"),
+    
 ]
 
 urlpatterns += router.urls
